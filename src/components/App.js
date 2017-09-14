@@ -1,37 +1,29 @@
 import React, {Component} from 'react';
 import '../styles/App.css';
+import Form from './Form'
+import Jumbotron from './Jumbotron';
 
 class App extends Component {
   // PROPS AND STATE
   // Set props and state below.
   // You should set state for vehicles (empty array), value (empty string), pilot (empty) string.
   // Enter your code below:
-  constructor(props){
-    super(props);
-    this.state = {
-      name:'',
-      vehicles: [],
-      value:'',
-      pilot:'',
-    };
-
-    this.handleNameChange =
-    this.handleNameChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-
+  state = {
+    vehicles: [],
+    value:'',
+    pilot:'',
+  }
+//
+//     // FORM: HANDLE INPUT CHANGES
+//     // handleNameChange below:
+//     // See form lesson for details.
+//     // Enter your code below:
+//
+handleNameChange = (event) => {
+  this.setState({
+    value: event.target.value
+  })
 }
-
-    // FORM: HANDLE INPUT CHANGES
-    // handleNameChange below:
-    // See form lesson for details.
-    // Enter your code below:
-
-    handleNameChange(event){
-      this.setState({
-        name:event.target.value,
-        vehicles: vehicles,
-      })
-    }
 
     //  FORM: SUBMIT METHOD
     // handleSubmit below:
@@ -39,17 +31,13 @@ class App extends Component {
     // Once the form is sumbited, two things need to happen: set the state of pilot to the input value.
     // Then, set the value of the input back to an empty string.
     // Enter your code below:
-    handleSubmit(event){
-      event.preventDefault();
-      const newUser = {
-        name: this.state.name,
-        vehicles: this.state.vehicles,
-      }
-      this.setState({
-        name: name,
-        vehicles: vehicles,
-      })
-    }
+handleFormSubmit = (event) => {
+  event.preventDefault();
+  this.setState({
+    pilot: this.state.value,
+    value:''
+  })
+}
 
     // LIFECYCLE
     // Which lifecycle is best for fetching data?
@@ -83,26 +71,15 @@ class App extends Component {
     */
     return (
       <div className="App">
+      < Jumbotron />
+      < Form handleFormSubmit={this.handleFormSubmit} handleNameChange={this.handleNameChange} value= {this.state.pilot} />
       /*
       The App component needs the following:
       jumbotron section, form section, vehicle cards section.
       Your form will also need a header in which you will pass the state of the form upon submit.
       */
-        <div className="card">
-          <img className="card-img-top" src="..." alt="Card image cap"/>
-          <div className="card-block">
-            <p className="card-text">Star Wars.</p>
-          </div>
-        </div>
-
-        <form className="form-inline" onSubmit={this.onSubmit}>
-          <label className="sr-only" forHTML="inlineFormInput">What is your name, pilot?</label>
-          <input type="text" className="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="Darth Vader? Or nah?..."/>
-          <input type="text" className="form-control" id="inlineFormInputGroup" placeholder="Username"/>
-        </form>
-    </div>
-
-    )
+      </div>
+    );
   }
 }
 
