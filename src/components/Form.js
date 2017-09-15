@@ -5,15 +5,18 @@ export default class PilotForm extends React.Component {
   render(){
     return(
 
-      <Form inline>
-        <FormGroup onSubmit={this.props.onSubmit}>
-          <Label for="examplePassword" hidden>Password</Label>
-          <Input placeholder="Enter your name here"type="password" name="password" id="examplePassword" placeholder="Password" />
-        </FormGroup>
-          {' '}
-        <Button>Submit</Button>
-   </Form>
-
+      <div className="card form">
+            <div className="card-block">
+              <h2 className="card-title">What is your name, pilot?</h2>
+              <form onSubmit={this.props.handleFormSubmit}>
+                <div className="form-group">
+                  <input className="form-control col-md-4 offset-md-4" id="pilotName"  name="name" type="text" placeholder="Enter your name" onChange={this.props.handleNameChange} value={this.props.name} />
+                </div>
+                  <button type="submit" className="btn btn-primary">Submit</button>
+              </form>
+              <h4>{this.props.value}</h4>
+            </div>
+            </div>
     )
   }
 }

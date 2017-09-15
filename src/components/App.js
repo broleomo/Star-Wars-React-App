@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import '../styles/App.css';
 import Form from './Form'
 import Jumbotron from './Jumbotron';
-
+import Vehicles from './Vehicles';
 class App extends Component {
   // PROPS AND STATE
   // Set props and state below.
@@ -46,12 +46,11 @@ handleFormSubmit = (event) => {
     // In your response look for 'results'. It should return this array.
     // You will want to use this array when you set the state of 'vehicles'. You will need this data in your render.
     // Enter your code below:
-    componentWillMount(){
+    componentDidMount(){
       fetch('https://swapi.co/api/vehicles/')
       .then(r => r.json())
-      .then((json)=>{
-        console.log("Data is fetching from Star Wars source.",json)
-        this.setState({vehicles:json});
+      .then(({results})=>{
+        this.setState({vehicles:results});
       }
     )
   }
@@ -72,7 +71,9 @@ handleFormSubmit = (event) => {
     return (
       <div className="App">
       < Jumbotron />
-      < Form handleFormSubmit={this.handleFormSubmit} handleNameChange={this.handleNameChange} value= {this.state.pilot} />
+      < Form handleFormSubmit={this.handleFormSubmit}
+       handleNameChange={this.handleNameChange} value= {this.state.pilot} name={this.state.value}  />
+       {this.state.vehicles.map(vehicle=> <Vehicles key={vehicle.url} {...vehicle} />)}
       /*
       The App component needs the following:
       jumbotron section, form section, vehicle cards section.
